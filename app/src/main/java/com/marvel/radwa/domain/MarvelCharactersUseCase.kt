@@ -1,5 +1,6 @@
 package com.marvel.radwa.domain
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.marvel.radwa.data.DataSource
 import com.marvel.radwa.data.Resource
@@ -30,7 +31,9 @@ class MarvelCharactersUseCase @Inject constructor(
     val response = _response
 
     fun getMarvelCharacters(page: Int) {
-        if (page == 1 || page <= response.value!!?.data?.data?.total!!) {
+
+        val pagesNumber = response.value?.let { it.data?.data?.total!! / Constants.pageSize } ?: 1
+        if (page == 1 || page <= pagesNumber) {
             val ts = System.currentTimeMillis().toString()
             val hash =
                 convertToMd5(ts + Constants.marvel_private_key + Constants.marvel_public_key)
@@ -46,9 +49,19 @@ class MarvelCharactersUseCase @Inject constructor(
                         page
                     )
                     _uiFlow.value = Resource.Loading(false)
-                    if (resources!!.data != null) {
+
+                    if (resources.errorResponse != null) {
+                        _uiFlow.value = Resource.Error(resources.errorResponse?.message)
+                        _uiFlow.value = Resource.Success(dataRepository.getAllCharacters())
+                    } else if (resources!!.data != null) {
                         _response.postValue(resources)
                         _uiFlow.value = Resource.Success(resources.data?.data?.results)
+
+                        resources.data?.data?.results?.map {
+                            Log.e("charName", it.name)
+                            dataRepository.saveCharacter(it)
+                            Log.e("size", dataRepository.getAllCharacters()?.size.toString())
+                        }
                     }
                 } catch (e: Exception) {
                     e.printStackTrace()

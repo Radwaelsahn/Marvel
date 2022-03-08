@@ -48,7 +48,6 @@ class CharactersAdapter(private val listener: CharacterListener) :
     fun addData(listItems: List<Character>) {
         var size = characters?.size!!
         characters?.addAll(listItems)
-        Log.e("size", characters?.size.toString())
         notifyItemRangeInserted(size, characters?.size!!)
     }
 

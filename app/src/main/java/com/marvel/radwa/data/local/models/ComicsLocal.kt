@@ -1,12 +1,17 @@
-package com.marvel.radwa.data.entities
+package com.marvel.radwa.data.local.models
 
 import android.os.Parcelable
+import androidx.room.ColumnInfo
+import androidx.room.Embedded
+import androidx.room.Entity
+import com.marvel.radwa.data.entities.Thumbnail
 import kotlinx.android.parcel.Parcelize
 
+@Entity
 @Parcelize
-data class Comics(
-    val title: String?,
-    val thumbnail: Thumbnail?
+data class ComicsLocal(
+    @ColumnInfo(name = "title") val title: String?,
+    @Embedded val thumbnail: Thumbnail?
 
 //    val available: Int,
 //    val collectionURI: String,

@@ -4,6 +4,7 @@ import com.marvel.radwa.data.entities.Character
 import com.marvel.radwa.data.entities.Comics
 import com.marvel.radwa.data.entities.responses.BaseResponse
 import com.marvel.radwa.data.local.LocalRepository
+import com.marvel.radwa.data.local.LocalSource
 import com.marvel.radwa.data.remote.RemoteRepository
 import javax.inject.Inject
 
@@ -16,6 +17,13 @@ class DataRepository @Inject constructor(
     private val remoteRepository: RemoteRepository,
     private val localRepository: LocalRepository,
 ) : DataSource {
+    override fun saveCharacter(character: Character) {
+        localRepository.saveCharacter(character)
+    }
+
+    override fun getAllCharacters(): List<Character> {
+        return localRepository.getAllCharacters()
+    }
 
     /**Local**/
 

@@ -4,14 +4,15 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Character(
-
+class Character(
     val id: Int,
     val name: String,
     val description: String,
     val thumbnail: Thumbnail,
-    val resourceURI: String,
-    val comics: Comics,
+) : Parcelable
+
+//    @ColumnInfo(name = "comics") val comics: Comics
+//    @ColumnInfo(name= resourceURI) val resourceURI: String,
 //    val events: Events?,
 //    val modified: String?,
 //    val series: Series?,
@@ -27,4 +28,3 @@ data class Character(
 //    stories	ResourceList	A resource list of stories in which this character appears.
 //    events	ResourceList	A resource list of events in which this character appears.
 //    series
-) : Parcelable

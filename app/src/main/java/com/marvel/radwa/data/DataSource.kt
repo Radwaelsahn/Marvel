@@ -3,9 +3,6 @@ package com.marvel.radwa.data
 import com.marvel.radwa.data.entities.Character
 import com.marvel.radwa.data.entities.Comics
 import com.marvel.radwa.data.entities.responses.BaseResponse
-import retrofit2.Response
-import retrofit2.http.Path
-import retrofit2.http.Query
 
 /**
  * Created by Radwa Elsahn on 7/26/2020
@@ -13,7 +10,8 @@ import retrofit2.http.Query
 
 interface DataSource {
     /**local**/
-//    fun saveUser(dataLogin: DataUser)
+    fun saveCharacter(character: Character)
+    fun getAllCharacters(): List<Character>
 
     /**remote*/
     suspend fun getMarvelCharacters(

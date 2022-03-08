@@ -15,23 +15,27 @@
  */
 
 package com.marvel.radwa.di
+
+import android.app.Application
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.marvel.radwa.data.local.LocalRepository
+import com.marvel.radwa.data.local.db.MarvelDatabase
+import com.marvel.radwa.data.local.mapper.CharacterLocalMapper
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.Dispatchers
+import javax.inject.Singleton
 import kotlin.coroutines.CoroutineContext
 
 @InstallIn(SingletonComponent::class)
 @Module
 class AppModule {
-    @Provides
-    fun provideLocalRepository(): LocalRepository {
-        return LocalRepository()
-    }
+//    @Provides
+//    fun provideLocalRepository(): LocalRepository {
+//        return LocalSource()
+//    }
 
     @Provides
     fun provideGson(): Gson {
@@ -43,4 +47,21 @@ class AppModule {
         return Dispatchers.Main
     }
 
+//    @Provides
+//    @Singleton
+//    fun providesDatabase(
+//        application: Application
+//    ) = MarvelDatabase.getInstance(application.applicationContext)
+//
+//
+//    @Provides
+//    @Singleton
+//    fun providesCharactersDAO(
+//        db: MarvelDatabase
+//    ) = db.CharactersDao()
+
+////////////////////////////////////
+//    @Provides
+//    @Singleton
+//    fun providesCharacterLocalMapper(mapper: CharacterLocalMapper) = CharacterLocalMapper()
 }

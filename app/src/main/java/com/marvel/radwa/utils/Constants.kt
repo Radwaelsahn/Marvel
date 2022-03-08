@@ -11,4 +11,6 @@ object Constants {
 
     const val IMAGE_CORNER = 20
     const val pageSize = 20
+
+
 }

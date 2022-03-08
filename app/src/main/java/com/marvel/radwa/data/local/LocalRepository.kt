@@ -1,37 +1,48 @@
 package com.marvel.radwa.data.local
 
+import android.content.Context
+import android.util.Log
+import com.marvel.radwa.data.entities.Character
+import com.marvel.radwa.data.local.db.MarvelDatabase
+import com.marvel.radwa.data.local.mapper.CharacterLocalMapper
 import javax.inject.Inject
 
 
 /**
- * Created by Radwa Elsahn on 7/7/2020
+ * Created by Radwa Elsahn on 3/3/2022
  */
 
-class LocalRepository @Inject constructor() {
+class LocalRepository @Inject constructor(
+    val context: Context
+//    private val characterDao: MarvelDatabase
+    //private val mapper: CharacterLocalMapper,
+//    private val characterDao: CharactersDao
+) : LocalSource {
 
     companion object {
-        const val KEY_FCM_TOKEN = "fcmToken"
-        const val KEY_USER = "user"
-        const val KEY_DEFAULT_CARD_ID = "defaultCardId"
-        const val KEY_IS_FIRST_TIME = "KEY_IS_FIRST_TIME"
-        const val KEY_SELECTED_COUNTRY = "selectedCountry"
-        const val KEY_SELECTED_CATEGORIES = "selectedCategories"
-        const val KEY_SELECTED_CATEGORY_SHOW_ALL_LINK = "showAllLink"
-        const val KEY_SELECTED_COUNTRY_SEARCH = "selectedCountrySearch"
-        const val KEY_SELECTED_CATEGORIES_SEARCH = "selectedCategoriesSearch"
-        const val KEY_SELECTED_SUBJECTS = "selectedSubjects"
-        const val KEY_PLAY_BACK_SPEED = "playbackSpeed"
-        const val KEY_VIDEO_QUALITY = "KEY_VIDEO_QUALITY"
-        const val KEY_AUTO_PLAY = "KEY_AUTO_PLAY"
-        const val KEY_RECENT_SEARCH_ITEMS = "recentSearchItems"
-        const val KEY_PLAY_BACK_TIME = "KEY_PLAY_BACK_TIME"
-        const val KEY_RECORD_DEVICE = "KEY_RECORD_DEVICE"
-        const val KEY_EDU_CATEGORIES = "KEY_EDU_CATEGORIES"
-        const val KEY_INTERCOM_REGISTERED = "KEY_INTERCOM_REGISTERED"
-        const val KEY_REFRESH_TOKEN_EXPIRED = "verify_refresh_token_timer"
-        const val KEY_PHONE_REQUIRED_COUNTER = "KEY_PhoneRequiredCounter"
+        const val KEY_CHARACTERS = "KEY_CHARACTERS"
+        val mapper: CharacterLocalMapper = CharacterLocalMapper()
+//        val characterDao: CharactersDao = MarvelDatabase.getInstance(context1)
+//        val characterDao: CharactersDao = MarvelDatabase.getInstance(context1)
     }
 
+    override fun saveCharacter(character: Character) {
+        val characterDao = MarvelDatabase.getInstance(context)?.CharactersDao()
+        var size = characterDao?.insertReplace(mapper.to(character))
+        Log.e("saveCharacter",size.toString())
+    }
+
+    override fun getAllCharacters(): List<Character> {
+//        val db = AppDatabase.getAppDataBase(App.context)
+//        var characters = db?.CharactersDao()?.getAll()!!
+        val characterDao = MarvelDatabase.getInstance(context)?.CharactersDao()
+        var characters = characterDao?.getAll()!!
+
+        var list = mutableListOf<Character>()
+        characters.map { list.add(mapper.from(it)) }
+
+        return list
+    }
 
 
 }

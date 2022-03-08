@@ -27,9 +27,7 @@ class RemoteRepository @Inject constructor() : RemoteSource {
     var refreshCount = 0
     private suspend fun processCall(responseCall: suspend () -> Response<*>): Any? {
         if (!Network.isConnected(App.context)) {
-            val list = LinkedHashMap<String, List<String>>()
-            list.put("error", listOf("No Internet Connection"))
-            val errorResponse = ErrorResponse("Error", list)
+            val errorResponse = ErrorResponse("No Internet Connection")
             return errorResponse
         }
         return try {
@@ -67,18 +65,14 @@ class RemoteRepository @Inject constructor() : RemoteSource {
                 } catch (e: Exception) {
                     e.printStackTrace()
 
-                    val list = LinkedHashMap<String, List<String>>()
-                    list.put("error", listOf("please try again later"))
-                    val errorResponse = ErrorResponse("error", list)
+                    val errorResponse = ErrorResponse("please try again later")
                     errorResponse
                 }
             }
         } catch (e: IOException) {
             e.printStackTrace()
             Log.e(TAG, "::IO Exception + ${e.message.toString()}", e)
-            val list = LinkedHashMap<String, List<String>>()
-            list.put("error", listOf("please try again later"))
-            val errorResponse = ErrorResponse("error", list)
+            val errorResponse = ErrorResponse("please try again later")
             errorResponse
         }
     }

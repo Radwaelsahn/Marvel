@@ -46,7 +46,6 @@ class ComicsAdapter :
     fun addData(listItems: List<Comics>) {
         var size = comicItems?.size!!
         comicItems?.addAll(listItems)
-        Log.e("size", comicItems?.size.toString())
         notifyItemRangeInserted(size, comicItems?.size!!)
     }
 
