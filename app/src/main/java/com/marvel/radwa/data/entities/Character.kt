@@ -5,6 +5,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 class Character(
+    val tmpId: Int,
     val id: Int,
     val name: String,
     val description: String,

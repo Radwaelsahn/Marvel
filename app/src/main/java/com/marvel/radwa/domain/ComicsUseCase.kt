@@ -1,5 +1,6 @@
 package com.marvel.radwa.domain
 
+import android.util.Log
 import com.marvel.radwa.data.DataSource
 import com.marvel.radwa.data.Resource
 import com.marvel.radwa.data.entities.Comics
@@ -16,7 +17,7 @@ import kotlin.coroutines.CoroutineContext
  * Created by Radwa Elsahn on 7/7/2020
  */
 
-class CharacterComicsUseCase @Inject constructor(
+class ComicsUseCase @Inject constructor(
     private val dataRepository: DataSource,
     override val coroutineContext: CoroutineContext
 ) : CoroutineScope {
@@ -39,10 +40,18 @@ class CharacterComicsUseCase @Inject constructor(
                     hash
                 )
                 _uiFlow.value = Resource.Loading(true)
-                if (resources!!.data != null) {
+                if (resources.errorResponse != null) {
+                    _uiFlow.value = Resource.Error(resources.errorResponse?.message)
+                    _uiFlow.value = Resource.Success(dataRepository.getComicsByCharacterId(characterId))
+                } else if (resources!!.data != null) {
                     resources.data?.data?.results?.let {
                         if (it.isNotEmpty()) {
                             _uiFlow.value = Resource.Success(it)
+                        }
+                        resources.data?.data?.results?.map {
+                            it.characterId = characterId
+                            dataRepository.saveComic(it)
+                            Log.e("size", dataRepository.getComicsByCharacterId(characterId)?.size.toString())
                         }
                     }
                 }

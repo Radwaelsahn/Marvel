@@ -11,6 +11,5 @@ import kotlinx.android.parcel.Parcelize
 data class Thumbnail(
     @ColumnInfo(name = "extension") val extension: String,
     @ColumnInfo(name = "path") val path: String,
-    @PrimaryKey(autoGenerate = true)
-    var dbId: Int = 0
+    @PrimaryKey(autoGenerate = true) var thumbnail_id: Int = 0
 ) : Parcelable

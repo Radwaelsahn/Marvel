@@ -10,6 +10,7 @@ import javax.inject.Singleton
 class CharacterLocalMapper @Inject constructor() : Mapper<Character, CharacterLocal> {
     override fun from(model: CharacterLocal): Character {
         return Character(
+            tmpId = model.character_unique_id,
             id = model.id,
             name = model.name,
             description = model.description,
@@ -19,6 +20,7 @@ class CharacterLocalMapper @Inject constructor() : Mapper<Character, CharacterLo
 
     override fun to(entity: Character): CharacterLocal {
         return CharacterLocal(
+            character_unique_id = entity.tmpId,
             id = entity.id,
             name = entity.name,
             description = entity.description,

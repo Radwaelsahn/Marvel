@@ -5,9 +5,10 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.marvel.radwa.data.local.models.CharacterLocal
+import com.marvel.radwa.data.local.models.ComicsLocal
 
 
-@Database(entities = arrayOf(CharacterLocal::class), version = 1)
+@Database(entities = arrayOf(CharacterLocal::class,ComicsLocal::class), version = 2)
 abstract class MarvelDatabase : RoomDatabase() {
     companion object {
         var INSTANCE: MarvelDatabase? = null
@@ -31,5 +32,6 @@ abstract class MarvelDatabase : RoomDatabase() {
         }
 
     }
-    abstract fun CharactersDao(): CharactersDao
+    abstract fun getCharactersDao(): CharactersDao
+    abstract fun getComicsDao(): ComicsDao
 }

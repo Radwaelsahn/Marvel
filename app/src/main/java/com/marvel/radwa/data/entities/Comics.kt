@@ -5,6 +5,8 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Comics(
+    val id:Int,
+    var characterId: Int?,
     val title: String?,
     val thumbnail: Thumbnail?
 

@@ -12,6 +12,8 @@ interface DataSource {
     /**local**/
     fun saveCharacter(character: Character)
     fun getAllCharacters(): List<Character>
+    fun saveComic(comics: Comics)
+    fun getComicsByCharacterId(id: Int): List<Comics>
 
     /**remote*/
     suspend fun getMarvelCharacters(
