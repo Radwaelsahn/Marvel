@@ -1,6 +1,5 @@
 package com.marvel.radwa.presentation.characters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.marvel.radwa.R
-import com.marvel.radwa.data.entities.Character
+import com.marvel.radwa.data.models.Character
 import com.marvel.radwa.utils.Constants
 import com.marvel.radwa.utils.convertToMd5
 import com.marvel.radwa.utils.loadImage

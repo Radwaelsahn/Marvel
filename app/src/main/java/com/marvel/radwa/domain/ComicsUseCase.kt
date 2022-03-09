@@ -1,9 +1,12 @@
 package com.marvel.radwa.domain
 
 import android.util.Log
-import com.marvel.radwa.data.DataSource
+import androidx.lifecycle.MutableLiveData
+import com.marvel.radwa.data.source.DataSource
 import com.marvel.radwa.data.Resource
-import com.marvel.radwa.data.entities.Comics
+import com.marvel.radwa.data.models.Character
+import com.marvel.radwa.data.models.Comics
+import com.marvel.radwa.data.models.responses.BaseResponse
 import com.marvel.radwa.utils.Constants
 import com.marvel.radwa.utils.convertToMd5
 import kotlinx.coroutines.CoroutineScope
@@ -25,6 +28,9 @@ class ComicsUseCase @Inject constructor(
     private val _uiFlow = MutableStateFlow<Resource<List<Comics>>>(Resource.Loading(true))
     val uiFlow: StateFlow<Resource<List<Comics>>> = _uiFlow
 
+    private val _response = MutableLiveData<Resource<BaseResponse<Comics>>>()
+    val response = _response
+
 
     fun getCharactersComics(characterId: Int) {
         _uiFlow.value = Resource.Loading(true)
@@ -45,13 +51,14 @@ class ComicsUseCase @Inject constructor(
                     _uiFlow.value = Resource.Success(dataRepository.getComicsByCharacterId(characterId))
                 } else if (resources!!.data != null) {
                     resources.data?.data?.results?.let {
+                        _response.postValue(resources)
                         if (it.isNotEmpty()) {
                             _uiFlow.value = Resource.Success(it)
                         }
                         resources.data?.data?.results?.map {
                             it.characterId = characterId
                             dataRepository.saveComic(it)
-                            Log.e("size", dataRepository.getComicsByCharacterId(characterId)?.size.toString())
+                            Log.e("comics size", dataRepository.getComicsByCharacterId(characterId)?.size.toString())
                         }
                     }
                 }

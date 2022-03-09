@@ -5,8 +5,8 @@ import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.marvel.radwa.R
 import com.marvel.radwa.data.Resource
-import com.marvel.radwa.data.entities.Character
-import com.marvel.radwa.data.entities.Comics
+import com.marvel.radwa.data.models.Character
+import com.marvel.radwa.data.models.Comics
 import com.marvel.radwa.presentation.BaseActivity
 //import com.marvel.radwa.presentation.UIState
 import com.marvel.radwa.utils.Keys
@@ -19,7 +19,7 @@ import kotlinx.coroutines.flow.collect
 @AndroidEntryPoint
 class CharacterDetailsActivity : BaseActivity() {
 
-    val characterDetailsViewModel: CharactersDetailsViewModel by viewModels()
+    val characterDetailsViewModel: ComicsViewModel by viewModels()
 
     var character: Character? = null
     override fun onCreate(savedInstanceState: Bundle?) {

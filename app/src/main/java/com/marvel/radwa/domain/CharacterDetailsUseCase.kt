@@ -1,10 +1,10 @@
 package com.marvel.radwa.domain
 
 import androidx.lifecycle.MutableLiveData
-import com.marvel.radwa.data.DataSource
+import com.marvel.radwa.data.source.DataSource
 import com.marvel.radwa.data.Resource
-import com.marvel.radwa.data.entities.Character
-import com.marvel.radwa.data.entities.responses.BaseResponse
+import com.marvel.radwa.data.models.Character
+import com.marvel.radwa.data.models.responses.BaseResponse
 import com.marvel.radwa.utils.Constants
 import com.marvel.radwa.utils.convertToMd5
 import kotlinx.coroutines.CoroutineScope

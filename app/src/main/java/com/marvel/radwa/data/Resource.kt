@@ -1,6 +1,6 @@
 package com.marvel.radwa.data
 
-import com.marvel.radwa.data.entities.responses.ErrorResponse
+import com.marvel.radwa.data.models.responses.ErrorResponse
 
 sealed class Resource<T>(
     val data: T? = null,

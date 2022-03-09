@@ -1,6 +1,6 @@
 package com.marvel.radwa.presentation.characters
 
-import com.marvel.radwa.data.entities.Character
+import com.marvel.radwa.data.models.Character
 
 
 interface CharacterListener {

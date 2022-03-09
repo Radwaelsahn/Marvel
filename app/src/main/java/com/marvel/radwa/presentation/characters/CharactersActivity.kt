@@ -7,7 +7,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.marvel.radwa.R
 import com.marvel.radwa.data.Resource
-import com.marvel.radwa.data.entities.Character
+import com.marvel.radwa.data.models.Character
 import com.marvel.radwa.presentation.BaseActivity
 import com.marvel.radwa.presentation.details.CharacterDetailsActivity
 import com.marvel.radwa.utils.Keys

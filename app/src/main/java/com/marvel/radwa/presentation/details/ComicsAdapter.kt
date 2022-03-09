@@ -8,8 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.marvel.radwa.R
-import com.marvel.radwa.data.entities.Comics
-import com.marvel.radwa.utils.changeSizeAspectRatio
+import com.marvel.radwa.data.models.Comics
 import com.marvel.radwa.utils.loadImage
 import kotlinx.android.extensions.LayoutContainer
 
