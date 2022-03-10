@@ -7,7 +7,7 @@ data class BaseResponse<T>(
     val attributionText: String,
     val attributionHTML: String,
     val etag: String,
-    val data: Data<T>
+    val data: ResponseData<T>
 )
 
 

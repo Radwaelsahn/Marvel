@@ -2,11 +2,10 @@ package com.marvel.radwa.domain
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.marvel.radwa.data.source.DataSource
 import com.marvel.radwa.data.Resource
-import com.marvel.radwa.data.models.Character
 import com.marvel.radwa.data.models.Comics
 import com.marvel.radwa.data.models.responses.BaseResponse
+import com.marvel.radwa.data.source.DataSource
 import com.marvel.radwa.utils.Constants
 import com.marvel.radwa.utils.convertToMd5
 import kotlinx.coroutines.CoroutineScope
@@ -39,16 +38,18 @@ class ComicsUseCase @Inject constructor(
             convertToMd5(ts + Constants.marvel_private_key + Constants.marvel_public_key)
         launch {
             try {
+                _uiFlow.value = Resource.Loading(true)
                 var resources = dataRepository.getCharacterComics(
                     characterId,
                     ts,
                     Constants.marvel_public_key,
                     hash
                 )
-                _uiFlow.value = Resource.Loading(true)
+                _uiFlow.value = Resource.Loading(false)
                 if (resources.errorResponse != null) {
                     _uiFlow.value = Resource.Error(resources.errorResponse?.message)
-                    _uiFlow.value = Resource.Success(dataRepository.getComicsByCharacterId(characterId))
+                    _uiFlow.value =
+                        Resource.Success(dataRepository.getComicsByCharacterId(characterId))
                 } else if (resources!!.data != null) {
                     resources.data?.data?.results?.let {
                         _response.postValue(resources)
@@ -58,7 +59,10 @@ class ComicsUseCase @Inject constructor(
                         resources.data?.data?.results?.map {
                             it.characterId = characterId
                             dataRepository.saveComic(it)
-                            Log.e("comics size", dataRepository.getComicsByCharacterId(characterId)?.size.toString())
+                            Log.e(
+                                "comics size",
+                                dataRepository.getComicsByCharacterId(characterId)?.size.toString()
+                            )
                         }
                     }
                 }

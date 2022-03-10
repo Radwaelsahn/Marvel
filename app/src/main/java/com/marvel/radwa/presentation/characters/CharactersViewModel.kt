@@ -14,10 +14,11 @@ class CharactersViewModel @Inject constructor(private val marvelUseCase: MarvelC
     val uiFlow = marvelUseCase.uiFlow
 
     var page = 1
-    var isLastPage = false
-    var isLoading = false
+    val isLastPage = marvelUseCase.isLastPage
+    val isLoading = marvelUseCase.isLoading
 
     val response = marvelUseCase.response
+    val resource = marvelUseCase.resource
 
     val characters = MutableLiveData<List<Character>>()
 

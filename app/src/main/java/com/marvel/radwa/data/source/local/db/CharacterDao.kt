@@ -5,7 +5,7 @@ import com.marvel.radwa.data.source.local.models.CharacterLocal
 
 @Dao
 interface CharactersDao {
-    @Query("SELECT * FROM `characters.db` ORDER BY createdOn")
+    @Query("SELECT * FROM `characters.db` ORDER BY createdOn ASC")
     fun getAll(): List<CharacterLocal>
 
 //    @Query("SELECT * FROM `characters.db` WHERE id IN (:ids)")

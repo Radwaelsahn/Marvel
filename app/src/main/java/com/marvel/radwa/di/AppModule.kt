@@ -30,6 +30,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.Dispatchers
+import javax.inject.Singleton
 import kotlin.coroutines.CoroutineContext
 
 @InstallIn(SingletonComponent::class)
@@ -47,12 +48,14 @@ class AppModule {
     }
 
     @Provides
+    @Singleton
     fun provideRemoteSource(): RemoteSource {
         return RemoteRepository()
     }
 
 
     @Provides
+    @Singleton
     fun provideLocalSource(
         context: Context,
         mapper: CharacterLocalMapper,
@@ -61,21 +64,4 @@ class AppModule {
         return LocalRepository(context,mapper,mapper2)
     }
 
-//    @Provides
-//    @Singleton
-//    fun providesDatabase(
-//        application: Application
-//    ) = MarvelDatabase.getInstance(application.applicationContext)
-//
-//
-//    @Provides
-//    @Singleton
-//    fun providesCharactersDAO(
-//        db: MarvelDatabase
-//    ) = db.CharactersDao()
-
-////////////////////////////////////
-//    @Provides
-//    @Singleton
-//    fun providesCharacterLocalMapper(mapper: CharacterLocalMapper) = CharacterLocalMapper()
 }

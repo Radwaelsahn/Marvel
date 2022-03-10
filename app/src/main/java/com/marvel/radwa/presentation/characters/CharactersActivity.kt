@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.marvel.radwa.R
 import com.marvel.radwa.data.Resource
 import com.marvel.radwa.data.models.Character
+import com.marvel.radwa.data.models.responses.BaseResponse
 import com.marvel.radwa.presentation.BaseActivity
 import com.marvel.radwa.presentation.details.CharacterDetailsActivity
 import com.marvel.radwa.utils.Keys
@@ -39,6 +40,26 @@ class CharactersActivity : BaseActivity(), CharacterListener {
 
     override fun getData() {
         charactersViewModel.getMarvelCharacters()
+//        observe(charactersViewModel.resource, ::handleResource)
+    }
+
+    private fun handleResource(resource: Resource<BaseResponse<Character>>) {
+        when (resource) {
+            is Resource.Loading -> {
+                showLoading(progress_bar, resource.loading)
+            }
+            is Resource.Success -> {
+                showLoading(progress_bar, false)
+                resource.data?.let { showCharacters(it.data?.results) } ?: showError(resource.error)
+            }
+            is Resource.Error -> {
+                showLoading(progress_bar, false)
+                resource.error?.let {
+                    showError(resource.error)
+                }
+            }
+        }
+
     }
 
     override fun observeFlowData() {
@@ -74,16 +95,15 @@ class CharactersActivity : BaseActivity(), CharacterListener {
             rv_characters.addOnScrollListener(object :
                 PaginationScrollListener(rv_characters.layoutManager as LinearLayoutManager) {
                 override fun isLastPage(): Boolean {
-                    return charactersViewModel.isLastPage
+                    return charactersViewModel.isLastPage?.value ?: false
                 }
 
                 override fun isLoading(): Boolean {
-                    return charactersViewModel.isLoading
+                    return charactersViewModel.isLoading?.value ?: false
                 }
 
                 override fun loadMoreItems() {
                     charactersViewModel.page++
-                    charactersViewModel.isLoading = true
                     charactersViewModel.getMarvelCharacters()
                 }
             })

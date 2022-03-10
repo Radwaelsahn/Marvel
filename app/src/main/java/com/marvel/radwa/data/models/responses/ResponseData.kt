@@ -1,6 +1,6 @@
 package com.marvel.radwa.data.models.responses
 
-data class Data<T>(
+data class ResponseData<T>(
     val offset: Int,
     val limit: Int,
     val total: Int,

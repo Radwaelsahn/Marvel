@@ -24,45 +24,4 @@ abstract class DataModule {
     @Binds
     abstract fun provideMarvelDatabase(db: MarvelDatabase): MarvelDatabase
 
-//    @Binds
-//    @Singleton
-//    abstract fun providesDatabase(db: MarvelDatabase): MarvelDatabase
-//
-//    @Binds
-//    @Singleton
-//    abstract fun providesCharactersDAO(dao: CharactersDao): CharactersDao
-
-//
-//    @Provides
-//    fun provideLocalRepository(): LocalSource {
-//        return LocalSource()
-//    }
-
-
-//    @Binds
-//    @Singleton
-//    abstract fun provideCharacterLocalMapper(mapper: CharacterLocalMapper): CharacterLocalMapper
-//
-//    @Binds
-//    @Singleton
-//    abstract fun provideCharactersDao(dao: CharactersDao): CharactersDao
-
-//    @Binds
-//    abstract fun provideLocalRepository(
-//        mapper: CharacterLocalMapper
-//    ): LocalRepository
-
-//    @Binds
-//    abstract fun provideLocalRepository1(
-//        characterDao: CharactersDao
-//    ): LocalRepository
-
-
-//    @Binds
-//    abstract fun provideLocalMapper(mapper: CharacterLocalMapper): CharacterLocalMapper
-
-    //    @Binds
-//    abstract fun provideLocalMapper(mapper: CharacterLocalMapper): CharacterLocalMapper
-
-
 }
