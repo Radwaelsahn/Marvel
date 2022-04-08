@@ -9,10 +9,10 @@ import com.marvel.radwa.data.models.Comics
 
 interface LocalSource {
 
-    fun saveCharacter(character: Character)
-    fun getAllCharacters(): List<Character>
+    suspend fun saveCharacter(character: Character)
+    suspend fun getAllCharacters(): List<Character>
 
-    fun saveComic(comics: Comics)
-    fun getComicById(id: Int): List<Comics>
+    suspend fun saveComic(comics: Comics)
+    suspend fun getComicById(id: Int): List<Comics>
 
 }

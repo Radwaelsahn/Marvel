@@ -21,19 +21,19 @@ class DataRepository @Inject constructor(
 //    private val remoteRepository: RemoteRepository,
 //    private val localRepository: LocalRepository,
 ) : DataSource {
-    override fun saveCharacter(character: Character) {
+    override suspend fun saveCharacter(character: Character) {
         localRepository.saveCharacter(character)
     }
 
-    override fun getAllCharacters(): List<Character> {
+    override suspend  fun getAllCharacters(): List<Character> {
         return localRepository.getAllCharacters()
     }
 
-    override fun saveComic(comics: Comics) {
+    override suspend  fun saveComic(comics: Comics) {
         localRepository.saveComic(comics)
     }
 
-    override fun getComicsByCharacterId(id: Int): List<Comics> {
+    override suspend fun getComicsByCharacterId(id: Int): List<Comics> {
         return localRepository.getComicById(id)
     }
 

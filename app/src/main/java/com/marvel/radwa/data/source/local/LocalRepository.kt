@@ -20,13 +20,13 @@ class LocalRepository @Inject constructor(
     val comicsMapper: ComicsLocalMapper
 ) : LocalSource {
 
-    override fun saveCharacter(character: Character) {
+    override suspend fun saveCharacter(character: Character) {
         val characterDao = MarvelDatabase.getInstance(context)?.getCharactersDao()
         var id = characterDao?.insertReplace(charatersMapper.to(character))
         Log.e("saveCharacter", id.toString())
     }
 
-    override fun getAllCharacters(): List<Character> {
+    override suspend fun getAllCharacters(): List<Character> {
 //        val db = AppDatabase.getAppDataBase(App.context)
 //        var characters = db?.CharactersDao()?.getAll()!!
         val characterDao = MarvelDatabase.getInstance(context)?.getCharactersDao()
@@ -39,13 +39,13 @@ class LocalRepository @Inject constructor(
     }
 
 
-    override fun saveComic(comics: Comics) {
+    override suspend fun saveComic(comics: Comics) {
         val comicsDao = MarvelDatabase.getInstance(context)?.getComicsDao()
         var id = comicsDao?.insertReplace(comicsMapper.to(comics)!!)
         Log.e("saveComic", id.toString())
     }
 
-    override fun getComicById(id: Int): List<Comics> {
+    override suspend fun getComicById(id: Int): List<Comics> {
         val comicsDao = MarvelDatabase.getInstance(context)?.getComicsDao()
         var comics = comicsDao?.getComicsById(id)
 

@@ -8,16 +8,16 @@ import com.marvel.radwa.data.source.local.models.ComicsLocal
 interface ComicsDao {
 
     @Query("SELECT * FROM `comics.db`")
-    fun getAll(): List<ComicsLocal>
+    suspend fun getAll(): List<ComicsLocal>
 
     @Query("SELECT * FROM `comics.db` where characterId =:characterId")
-    fun getComicsById(characterId:Int): List<ComicsLocal>
+    suspend fun getComicsById(characterId:Int): List<ComicsLocal>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertReplace(entity: ComicsLocal): Long
+    suspend fun insertReplace(entity: ComicsLocal): Long
 
     @Insert
-    fun insert(vararg comic: ComicsLocal)
+    suspend fun insert(vararg comic: ComicsLocal)
 
 
 }

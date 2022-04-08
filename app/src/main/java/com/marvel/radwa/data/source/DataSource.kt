@@ -11,10 +11,10 @@ import com.marvel.radwa.data.models.responses.BaseResponse
 
 interface DataSource {
     /**local**/
-    fun saveCharacter(character: Character)
-    fun getAllCharacters(): List<Character>
-    fun saveComic(comics: Comics)
-    fun getComicsByCharacterId(id: Int): List<Comics>
+    suspend fun saveCharacter(character: Character)
+    suspend fun getAllCharacters(): List<Character>
+    suspend fun saveComic(comics: Comics)
+    suspend fun getComicsByCharacterId(id: Int): List<Comics>
 
     /**remote*/
     suspend fun getMarvelCharacters(
