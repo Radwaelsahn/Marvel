@@ -2,6 +2,7 @@ package com.marvel.radwa.data.source.remote.networking
 
 import com.google.gson.Gson
 import com.marvel.radwa.BuildConfig
+import com.marvel.radwa.data.source.local.Session
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -17,7 +18,7 @@ import javax.inject.Singleton
 
 @Singleton
 class ServiceGenerator
-@Inject constructor() {
+@Inject constructor(val session: Session) {
     companion object {
 
         private const val CONNECTION_TIMEOUT = 30L

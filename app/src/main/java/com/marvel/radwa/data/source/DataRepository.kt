@@ -17,9 +17,7 @@ import javax.inject.Inject
 
 class DataRepository @Inject constructor(
     private val remoteRepository: RemoteSource,
-    private val localRepository: LocalSource,
-//    private val remoteRepository: RemoteRepository,
-//    private val localRepository: LocalRepository,
+    private val localRepository: LocalSource
 ) : DataSource {
     override suspend fun saveCharacter(character: Character) {
         localRepository.saveCharacter(character)

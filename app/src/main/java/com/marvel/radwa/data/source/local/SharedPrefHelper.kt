@@ -4,19 +4,18 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.marvel.radwa.App
 import com.marvel.radwa.utils.Constants
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
+import javax.inject.Singleton
 
-//todo we should use this as a dagger module
-object SharedPrefHelper {
+@Singleton
+class SharedPrefHelper @Inject constructor(@ApplicationContext context: Context) {
 
 //    private val KEY_PREFS = "baims_new.prefs"//"baims.prefs"
 
 //        if (BuildConfig.IS_LIFE) "life.prefs" else if (BuildConfig.IS_BAIMS) "baims.prefs" else "gsi.prefs"
 
-    private val sharedPreferences: SharedPreferences
-
-    init {
-        sharedPreferences = App.context.getSharedPreferences(Constants.KEY_PREFS, Context.MODE_PRIVATE)
-    }
+    private val sharedPreferences: SharedPreferences = context.getSharedPreferences(Constants.KEY_PREFS, Context.MODE_PRIVATE)
 
     fun setIntoSharedPref(context: Context?, key: String, value: String, prefName: String) {
 
@@ -46,14 +45,10 @@ object SharedPrefHelper {
 
     fun removeSharedPref(key: String) = sharedPreferences.edit().remove(key).apply()
 
-    fun isDashboardShownBefore(): Boolean = sharedPreferences.getBoolean(DASHBOARD_SEEN, false)
-
-    fun setDashboardShown() = sharedPreferences.edit().putBoolean(DASHBOARD_SEEN, true).apply()
-
     fun setIntoSharedPrefInt(key: String, value: Int) = sharedPreferences.edit().putInt(key, value).apply()
 
     fun getFromSharedPrefInt(key: String): Int = sharedPreferences.getInt(key, 0)
 
-    private const val DASHBOARD_SEEN = "is_dashboard_seen"
+
 
 }

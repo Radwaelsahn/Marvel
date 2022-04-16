@@ -16,18 +16,24 @@
 
 package com.marvel.radwa.di
 
+import android.app.Application
 import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.marvel.radwa.App
 import com.marvel.radwa.data.source.local.LocalRepository
 import com.marvel.radwa.data.source.local.LocalSource
+import com.marvel.radwa.data.source.local.Session
+import com.marvel.radwa.data.source.local.SharedPrefHelper
 import com.marvel.radwa.data.source.local.mapper.CharacterLocalMapper
 import com.marvel.radwa.data.source.local.mapper.ComicsLocalMapper
 import com.marvel.radwa.data.source.remote.RemoteRepository
 import com.marvel.radwa.data.source.remote.RemoteSource
+import com.marvel.radwa.data.source.remote.networking.ServiceGenerator
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.Dispatchers
 import javax.inject.Singleton
@@ -36,6 +42,27 @@ import kotlin.coroutines.CoroutineContext
 @InstallIn(SingletonComponent::class)
 @Module
 class AppModule {
+
+
+    @Singleton
+    @Provides
+    fun provideApplication(application: Application): App = application as App
+
+    @Singleton
+    @Provides
+    fun provideSharedPrefHelper(@ApplicationContext context: Context): SharedPrefHelper = SharedPrefHelper(context)
+
+    @Singleton
+    @Provides
+    fun provideSession(sharedPrefHelper: SharedPrefHelper): Session = Session(sharedPrefHelper)
+
+    @Singleton
+    @Provides
+    fun provideServiceGenerator(session: Session): ServiceGenerator = ServiceGenerator(session) // TODO Remove after refactor
+
+//    @Singleton
+//    @Provides
+//    fun provideLocalHelper(session: Session): LocaleHelper = LocaleHelper(session)
 
     @Provides
     fun provideGson(): Gson {
