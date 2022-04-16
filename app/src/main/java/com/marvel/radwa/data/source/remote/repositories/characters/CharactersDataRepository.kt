@@ -1,13 +1,9 @@
-package com.marvel.radwa.data.source
+package com.marvel.radwa.data.source.remote.repositories.characters
 
 import com.marvel.radwa.data.Resource
 import com.marvel.radwa.data.models.Character
-import com.marvel.radwa.data.models.Comics
 import com.marvel.radwa.data.models.responses.BaseResponse
-import com.marvel.radwa.data.source.local.LocalRepository
 import com.marvel.radwa.data.source.local.LocalSource
-import com.marvel.radwa.data.source.remote.RemoteRepository
-import com.marvel.radwa.data.source.remote.RemoteSource
 import javax.inject.Inject
 
 
@@ -15,25 +11,19 @@ import javax.inject.Inject
  * Created by Radwa Elsahn on 7/7/2020
  */
 
-class DataRepository @Inject constructor(
-    private val remoteRepository: RemoteSource,
+class CharactersDataRepository @Inject constructor(
+    private val remoteRepository: CharactersRemoteRepository,
     private val localRepository: LocalSource
-) : DataSource {
+) : CharactersDataSource {
+
     override suspend fun saveCharacter(character: Character) {
         localRepository.saveCharacter(character)
     }
 
-    override suspend  fun getAllCharacters(): List<Character> {
+    override suspend fun getAllCharacters(): List<Character> {
         return localRepository.getAllCharacters()
     }
 
-    override suspend  fun saveComic(comics: Comics) {
-        localRepository.saveComic(comics)
-    }
-
-    override suspend fun getComicsByCharacterId(id: Int): List<Comics> {
-        return localRepository.getComicById(id)
-    }
 
     /**Local**/
 
@@ -54,12 +44,4 @@ class DataRepository @Inject constructor(
         return remoteRepository.getCharacterDetails(characterId, ts, apikey, hash)
     }
 
-    override suspend fun getCharacterComics(
-        characterId: Int,
-        ts: String,
-        apikey: String,
-        hash: String
-    ): Resource<BaseResponse<Comics>> {
-        return remoteRepository.getCharacterComics(characterId, ts, apikey, hash)
-    }
 }

@@ -1,4 +1,4 @@
-package com.marvel.radwa.data.source.remote.networking.services
+package com.marvel.radwa.data.source.remote.repositories.comics
 
 import com.marvel.radwa.data.models.Comics
 import com.marvel.radwa.data.models.responses.BaseResponse

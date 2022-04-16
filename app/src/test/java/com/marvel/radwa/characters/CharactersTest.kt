@@ -6,8 +6,7 @@ import com.marvel.radwa.App
 import com.marvel.radwa.data.Resource
 import com.marvel.radwa.data.models.Character
 import com.marvel.radwa.data.models.responses.BaseResponse
-import com.marvel.radwa.data.models.responses.ErrorResponse
-import com.marvel.radwa.data.source.DataRepository
+import com.marvel.radwa.data.source.remote.repositories.comics.ComicsDataRepository
 import com.marvel.radwa.domain.MarvelCharactersUseCase
 import com.marvel.radwa.presentation.characters.CharactersViewModel
 import com.marvel.radwa.utils.InstantExecutorExtension
@@ -16,7 +15,6 @@ import com.marvel.radwa.utils.TestModelsGenerator
 import io.mockk.*
 import io.mockk.impl.annotations.RelaxedMockK
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import org.bouncycastle.jcajce.provider.symmetric.ARC4
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
@@ -40,7 +38,7 @@ class CharactersTest {
     private lateinit var charactersUseCase: MarvelCharactersUseCase
 
     @RelaxedMockK
-    private lateinit var dataRepository: DataRepository
+    private lateinit var dataRepository: ComicsDataRepository
 
 
     private val testModelsGenerator: TestModelsGenerator = TestModelsGenerator()

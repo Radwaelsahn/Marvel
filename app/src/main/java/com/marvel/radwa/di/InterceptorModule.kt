@@ -1,7 +1,7 @@
 package com.marvel.radwa.di
 
-import com.marvel.radwa.data.source.remote.AuthInterceptor
-import com.marvel.radwa.data.source.remote.TokenAuthenticator
+import com.marvel.radwa.data.source.remote.networking.AuthInterceptor
+import com.marvel.radwa.data.source.remote.networking.TokenAuthenticator
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

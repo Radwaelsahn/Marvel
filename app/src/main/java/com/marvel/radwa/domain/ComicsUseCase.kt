@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.marvel.radwa.data.Resource
 import com.marvel.radwa.data.models.Comics
 import com.marvel.radwa.data.models.responses.BaseResponse
-import com.marvel.radwa.data.source.DataSource
+import com.marvel.radwa.data.source.remote.repositories.comics.ComicsDataSource
 import com.marvel.radwa.utils.Constants
 import com.marvel.radwa.utils.convertToMd5
 import kotlinx.coroutines.CoroutineScope
@@ -20,7 +20,7 @@ import kotlin.coroutines.CoroutineContext
  */
 
 class ComicsUseCase @Inject constructor(
-    private val dataRepository: DataSource,
+    private val dataRepository: ComicsDataSource,
     override val coroutineContext: CoroutineContext
 ) : CoroutineScope {
 

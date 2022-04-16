@@ -1,7 +1,7 @@
 package com.marvel.radwa.utils
 
 object Constants {
-    const val KEY_PREFS = "baims_new.prefs"
+    const val KEY_PREFS = "task_new.prefs"
     const val CONTENT_TYPE = "Content-Type"
     const val Authorization = "Authorization"
     const val Language = "Accept-Language"

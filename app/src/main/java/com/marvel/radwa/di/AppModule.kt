@@ -27,8 +27,6 @@ import com.marvel.radwa.data.source.local.Session
 import com.marvel.radwa.data.source.local.SharedPrefHelper
 import com.marvel.radwa.data.source.local.mapper.CharacterLocalMapper
 import com.marvel.radwa.data.source.local.mapper.ComicsLocalMapper
-import com.marvel.radwa.data.source.remote.RemoteRepository
-import com.marvel.radwa.data.source.remote.RemoteSource
 import com.marvel.radwa.data.source.remote.networking.ServiceGenerator
 import dagger.Module
 import dagger.Provides
@@ -60,24 +58,9 @@ class AppModule {
     @Provides
     fun provideServiceGenerator(session: Session): ServiceGenerator = ServiceGenerator(session) // TODO Remove after refactor
 
-//    @Singleton
-//    @Provides
-//    fun provideLocalHelper(session: Session): LocaleHelper = LocaleHelper(session)
-
-    @Provides
-    fun provideGson(): Gson {
-        return GsonBuilder().create()
-    }
-
     @Provides
     fun provideCoroutineContext(): CoroutineContext {
         return Dispatchers.Main
-    }
-
-    @Provides
-    @Singleton
-    fun provideRemoteSource(): RemoteSource {
-        return RemoteRepository()
     }
 
 

@@ -1,4 +1,4 @@
-package com.marvel.radwa.data.source.remote
+package com.marvel.radwa.data.source.remote.networking
 
 import com.marvel.radwa.data.source.local.Session
 import com.marvel.radwa.utils.Constants

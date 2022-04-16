@@ -11,10 +11,6 @@ import javax.inject.Singleton
 @Singleton
 class SharedPrefHelper @Inject constructor(@ApplicationContext context: Context) {
 
-//    private val KEY_PREFS = "baims_new.prefs"//"baims.prefs"
-
-//        if (BuildConfig.IS_LIFE) "life.prefs" else if (BuildConfig.IS_BAIMS) "baims.prefs" else "gsi.prefs"
-
     private val sharedPreferences: SharedPreferences = context.getSharedPreferences(Constants.KEY_PREFS, Context.MODE_PRIVATE)
 
     fun setIntoSharedPref(context: Context?, key: String, value: String, prefName: String) {

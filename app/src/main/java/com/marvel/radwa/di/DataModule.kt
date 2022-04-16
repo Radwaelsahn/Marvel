@@ -3,8 +3,6 @@ package com.marvel.radwa.di
 
 import android.app.Application
 import android.content.Context
-import com.marvel.radwa.data.source.DataRepository
-import com.marvel.radwa.data.source.DataSource
 import com.marvel.radwa.data.source.local.db.MarvelDatabase
 import dagger.Binds
 import dagger.Module

@@ -4,6 +4,8 @@ package com.marvel.radwa.di
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.marvel.radwa.BuildConfig
+import com.marvel.radwa.data.source.remote.repositories.characters.CharactersService
+import com.marvel.radwa.data.source.remote.repositories.comics.CharacterComicsService
 import com.marvel.radwa.utils.Constants
 import dagger.Module
 import dagger.Provides
@@ -57,6 +59,17 @@ object NetworkModule {
             .baseUrl(BuildConfig.BASE_URL + BuildConfig.API_VERSION)
             .addConverterFactory(GsonConverterFactory.create(gson))
     }
+
+
+    @Singleton
+    @Provides
+    fun provideCharactersService(retrofitBuilder: Retrofit.Builder): CharactersService = retrofitBuilder.build().create(
+        CharactersService::class.java)
+
+    @Singleton
+    @Provides
+    fun provideComicsService(retrofitBuilder: Retrofit.Builder): CharacterComicsService = retrofitBuilder.build().create(
+        CharacterComicsService::class.java)
 
 
 //    @Singleton

@@ -6,9 +6,8 @@ import com.marvel.radwa.App
 import com.marvel.radwa.data.Resource
 import com.marvel.radwa.data.models.Comics
 import com.marvel.radwa.data.models.responses.BaseResponse
-import com.marvel.radwa.data.source.DataRepository
+import com.marvel.radwa.data.source.remote.repositories.comics.ComicsDataRepository
 import com.marvel.radwa.domain.ComicsUseCase
-import com.marvel.radwa.presentation.characters.CharactersViewModel
 import com.marvel.radwa.presentation.details.ComicsViewModel
 import com.marvel.radwa.utils.InstantExecutorExtension
 import com.marvel.radwa.utils.MainCoroutineRule
@@ -39,7 +38,7 @@ class ComicsTest {
     private lateinit var comicsUseCase: ComicsUseCase
 
     @RelaxedMockK
-    private lateinit var dataRepository: DataRepository
+    private lateinit var dataRepository: ComicsDataRepository
 
 
     private val testModelsGenerator: TestModelsGenerator = TestModelsGenerator()
